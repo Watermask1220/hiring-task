@@ -64,17 +64,15 @@ The backend handles the server-side logic and APIs.
 ### Step 2: Frontend Setup
 The frontend handles the user interface.
 
-1. Navigate to the `frontend` directory:
-   ```
-2. Install dependencies:
+1. Navigate to the `frontend` directory & Install dependencies:
    ```bash
    npm install
 
-3. Start the frontend development server:
+2. Start the frontend development server:
    ```bash
    npm run dev
 
-4. By default, the frontend runs on:
+3. By default, the frontend runs on:
    ```
    http://localhost:5173
    ```
@@ -99,7 +97,7 @@ Here are some common issues and their fixes:
 1. **Backend not starting**:
    - Ensure all dependencies are installed by running:
      ```bash
-     npm install
+     yarn install
      ```
    - Check that you have the correct Node.js version installed.
 
