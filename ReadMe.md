@@ -1,58 +1,118 @@
-# Home Assignment: Todo List Application
+## Prerequisites
 
-## Objective  
-Develop a full stack Todo List application using the provided backend code for authentication. The application should allow users to create, read, update, and delete todo items.
+Before you begin, ensure the following tools are installed on your system:
 
-## Technologies
-- **Backend:** Express.js (authentication code provided)
-- **Frontend:** React.js (architecture is flexible)
+1. **[Node.js](https://nodejs.org)** (Version 14 or higher recommended)
+2. **[npm](https://www.npmjs.com/)** or **[Yarn](https://yarnpkg.com/)** for managing dependencies
+3. A web browser (e.g., Chrome, Firefox) to access the application.
 
-## Requirements
+### Step 2: Set-up Database-SQL
 
-### 1. Authentication:
-   - Implement user authentication using the provided backend code.
-   - Ensure secure login and registration processes.
-   - Use JWT or session-based authentication as per the provided backend architecture.
+1. Download and install MySQL from the official website: https://dev.mysql.com/downloads/
+2. Follow the installation steps and set a root password during setup.
+3. Follow this commands
 
-### 2. Todo List Features:
-   - **CRUD Operations:** 
-     - Users should be able to create, read, update, and delete their todo items.
-   - **Todo Item Structure:**
-     - Each todo item should have at least the following properties:
-       - Title (string)
-       - Description (string)
-       - Status (boolean: completed or not)
-       - Due Date (date)
-   - **User-specific Todos:**
-     - Ensure that each user can only manage their own todo items.
+   mysql -u root -p
 
-### 3. Frontend Requirements:
-   - Use React.js for the frontend.
-   - Implement a clean and user-friendly interface.
-   - Ensure responsiveness for different screen sizes.
-   - Use state management (e.g., Context API, Redux) to manage application state.
-   - Include validation for user inputs.
+   CREATE DATABASE todo_list;
 
-### 4. Additional Features (Optional):
-   - Implement sorting and filtering options for the todo list.
-   - Add user notifications for actions (e.g., todo added, updated, deleted).
-   - Provide a dark mode toggle.
+   CREATE USER 'root'@'localhost' IDENTIFIED BY 'password';
 
-### 5. Testing:
-   - Write unit tests for critical components and functions.
-   - Ensure the application is free of critical bugs.
+   GRANT ALL PRIVILEGES ON todo_list.* TO 'root'@'localhost';
 
-### 6. Documentation:
-   - Provide clear documentation on how to set up and run the application.
-   - Include comments in the code to explain key functionalities.
+   FLUSH PRIVILEGES;
 
-### 7. Submission Guidelines:
-   - Submit the code repository (e.g., GitHub) with a clear commit history.
-   - Include a README file with instructions on how to run the application.
-   - Provide a demo link if hosted online.
+   USE todo_list;
 
-## Evaluation Criteria
-- Code quality and organization.
-- Functionality and adherence to requirements.
-- User interface design and user experience.
-- Testing coverage and documentation.
+   CREATE TABLE user (
+      uuid CHAR(36) NOT NULL PRIMARY KEY,
+      username VARCHAR(255) NULL,
+      email VARCHAR(255) NOT NULL UNIQUE,
+      password VARCHAR(255) NOT NULL
+   );
+
+   CREATE TABLE todo (
+      uuid CHAR(36) NOT NULL PRIMARY KEY,
+      userId CHAR(36) NOT NULL,
+      title VARCHAR(255) NOT NULL,
+      description TEXT NOT NULL,
+      status BOOLEAN DEFAULT FALSE,
+      dueDate DATE DEFAULT '2023-01-01',
+      FOREIGN KEY (userId) REFERENCES user(uuid)
+   );
+
+
+
+### Step 1: Backend Setup
+The backend handles the server-side logic and APIs.
+
+1. Navigate to the `backend` directory & Install dependencies:
+   ```bash
+   yarn install
+
+3. Start the backend server:
+   ```bash
+   yarn dev
+   ```
+4. By default, the backend runs on:
+   ```
+   http://localhost:8000
+   ```
+
+---
+
+### Step 2: Frontend Setup
+The frontend handles the user interface.
+
+1. Navigate to the `frontend` directory:
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+
+3. Start the frontend development server:
+   ```bash
+   npm run dev
+
+4. By default, the frontend runs on:
+   ```
+   http://localhost:5173
+   ```
+
+---
+
+## Running the Application
+
+To access the application:
+
+1. Make sure both the **backend** and **frontend** servers are running.
+2. Open your web browser and go to:
+   - **Frontend**: `http://localhost:5173`
+   - **Backend**: `http://localhost:8000`
+
+---
+
+## Troubleshooting
+
+Here are some common issues and their fixes:
+
+1. **Backend not starting**:
+   - Ensure all dependencies are installed by running:
+     ```bash
+     npm install
+     ```
+   - Check that you have the correct Node.js version installed.
+
+2. **Frontend not starting**:
+   - Ensure the backend server is running at `http://localhost:8000`.
+   - Reinstall frontend dependencies by running:
+     ```bash
+     npm install
+     ```
+
+3. **Missing `wmic` error on Windows**:
+   - If you encounter this error, ensure `wmic` is installed on your system or modify the dependencies causing the issue.
+
+---
+
+
