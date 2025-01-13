@@ -13,24 +13,24 @@ Before you begin, ensure the following tools are installed on your system:
 3. Follow this commands
 ```bash
    mysql -u root -p
-```bash
+
    CREATE DATABASE todo_list;
-```bash
+
    CREATE USER 'root'@'localhost' IDENTIFIED BY 'password';
-```bash
+
    GRANT ALL PRIVILEGES ON todo_list.* TO 'root'@'localhost';
-```bash
+
    FLUSH PRIVILEGES;
-```bash
+
    USE todo_list;
-```bash
+
    CREATE TABLE user (
       uuid CHAR(36) NOT NULL PRIMARY KEY,
       username VARCHAR(255) NULL,
       email VARCHAR(255) NOT NULL UNIQUE,
       password VARCHAR(255) NOT NULL
    );
-```bash
+
    CREATE TABLE todo (
       uuid CHAR(36) NOT NULL PRIMARY KEY,
       userId CHAR(36) NOT NULL,
@@ -40,7 +40,7 @@ Before you begin, ensure the following tools are installed on your system:
       dueDate DATE DEFAULT '2023-01-01',
       FOREIGN KEY (userId) REFERENCES user(uuid)
    );
-
+```
 
 
 ### Step 1: Backend Setup
